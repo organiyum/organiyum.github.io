@@ -309,6 +309,7 @@
     overflow: hidden;
     transition: 0.5s;
     border-radius: 10px 10px 0 0;
+    height: 270px;
 }
 
 .fruite .fruite-item .fruite-img img {

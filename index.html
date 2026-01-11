@@ -44,6 +44,7 @@ let cart = [];
             
               cart.forEach((item, index) => {
                 message += `${index + 1}. ${item.name}%0A`;
+                message += ` ${item.unit}%0A`;
                 message += `   Qty: ${item.qty}%0A%0A`;
               });
             
@@ -764,7 +765,8 @@ const products = [
             cart.push({
               id: product.id,
               name: product.name,
-              qty: qty
+              qty: qty,
+              unit: product.price
             });
           }
         

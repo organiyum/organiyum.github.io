@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    .product-img {
+      max-height: 420px;
+      object-fit: contain;
+    }
+
+    /* Floating Cart */
+    #floatingCart {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: #25D366;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 9999;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    #cartCount {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: red;
+      color: #fff;
+      font-size: 12px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+      <!-- Navbar start -->
+      <div class="container-fluid fixed-top">
+        <div class="container topbar bg-primary d-none d-lg-block">
+            <div class="d-flex justify-content-between">
+                <div class="top-info ps-2">
+                    <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">vpo chhainsa ballabgarh faridabad haryana</a></small>
+                    <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">infoorganiyum@gmail.com</a></small>
+                </div>
+                <div class="top-link pe-2">
+                    <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
+                    <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small></a>
+                    <!-- <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a> -->
+                </div>
+            </div>
+        </div>
+        <div class="container px-0">
+            <nav class="navbar navbar-light bg-white navbar-expand-xl">
+                <a href="index.html" class="navbar-brand"><h1 class="text-primary display-6">Organiyum</h1></a>
+                <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars text-primary"></span>
+                </button>
+                <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+                    <div class="navbar-nav mx-auto">
+                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                    </div>
+                    <div class="d-flex m-3 me-0">
+                        <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+<nav class="navbar navbar-light bg-light px-3" style="margin-top: 150px;">
+  <a href="index.html" class="navbar-brand fw-bold">← Back to Products</a>
+</nav>
+
+<!-- PRODUCT DETAIL -->
+<div class="container my-5">
+  <div class="row" id="productDetail">
+    <!-- dynamic content -->
+  </div>
+</div>
+
+<!-- FLOATING CART -->
+<div id="floatingCart" onclick="checkoutWhatsApp()">
+  <i class="fa fa-shopping-cart"></i>
+  <span id="cartCount">0</span>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+/* ================= PRODUCTS DATA ================= */
+const products = [
+  {
+    id: 1,
+    name: "Black Mustard Oil Gold",
+    price: "Rs 190 / Ltr",
+    image: "img/mustantoill.jpeg",
+    description: "Pure black mustard oil, traditionally cold-pressed for daily cooking."
+  },
+  {
+    id: 2,
+    name: "Black Mustard Oil Premium",
+    price: "Rs 280 / Ltr",
+    image: "img/mustantoill.jpeg",
+    description: "Premium quality black mustard oil with strong aroma and rich taste."
+  },
+  {
+    id: 3,
+    name: "Yellow Mustard Oil Gold (पिली सरसो तेल)",
+    price: "Rs 280 / Ltr",
+    image: "img/banner3.jpeg",
+    description: "Pure yellow mustard oil ideal for Indian cooking and pickles."
+  },
+  {
+    id: 4,
+    name: "Yellow Mustard Oil Premium (पिली सरसो तेल)",
+    price: "Rs 380 / Ltr",
+    image: "img/banner3.jpeg",
+    description: "High-quality premium yellow mustard oil with natural pungency."
+  },
+  {
+    id: 5,
+    name: "Sesame Oil Gold",
+    price: "Rs 470 / Ltr",
+    image: "img/seasam.jpeg",
+    description: "Cold-pressed sesame oil, good for cooking and Ayurvedic use."
+  },
+  {
+    id: 6,
+    name: "Sesame Oil Premium",
+    price: "Rs 550 / Ltr",
+    image: "img/seasam.jpeg",
+    description: "Premium sesame oil with enhanced purity and aroma."
+  },
+  {
+    id: 7,
+    name: "Coconut Oil",
+    price: "Rs 1000 / kg",
+    image: "img/coconut.jpeg",
+    description: "Pure coconut oil suitable for cooking, hair, and skin care."
+  },
+  {
+    id: 8,
+    name: "Almond Oil",
+    price: "Rs 3000 / kg",
+    image: "img/almondoil.jpeg",
+    description: "Pure almond oil rich in nutrients, ideal for hair and massage."
+  },
+
+  {
+    id: 9,
+    name: "Dant Manjan",
+    price: "Rs 100 / 100gm",
+    image: "img/dantmanjan.jpeg",
+    description: "Herbal tooth powder for strong teeth and healthy gums."
+  },
+  {
+    id: 10,
+    name: "Garam Masala",
+    price: "Rs 100 / 100gm",
+    image: "img/grammasala.png",
+    description: "Traditional blend of aromatic spices for rich Indian flavor."
+  },
+  {
+    id: 11,
+    name: "Long (Clove)",
+    price: "Rs 100 / 100gm",
+    image: "img/long.jpeg",
+    description: "High-quality cloves used in cooking and medicinal purposes."
+  },
+  {
+    id: 12,
+    name: "Javitri (Jawatri)",
+    price: "Rs 280 / 100gm",
+    image: "img/javyatri.jpeg",
+    description: "Premium mace spice with strong aroma and medicinal benefits."
+  },
+
+  {
+    id: 13,
+    name: "Turmeric Powder (हल्दी)",
+    price: "Rs 140 / 500gm",
+    image: "img/haldi.jpeg",
+    description: "Pure turmeric powder known for color, taste, and health benefits."
+  },
+  {
+    id: 14,
+    name: "Red Chilli Powder (मिर्च)",
+    price: "Rs 160 / 500gm",
+    image: "img/mirchpowder.jpeg",
+    description: "Fresh ground red chilli powder for spicy and flavorful dishes."
+  },
+  {
+    id: 15,
+    name: "Jeera Cumin (जीरा)",
+    price: "Rs 40 / 100gm",
+    image: "img/jeera.jpeg",
+    description: "Aromatic cumin seeds used in everyday Indian cooking."
+  },
+  {
+    id: 16,
+    name: "Black Pepper (काली मिर्च)",
+    price: "Rs 100 / 100gm",
+    image: "img/kalimirch.jpeg",
+    description: "Strong and spicy black pepper with rich aroma."
+  },
+
+  {
+    id: 17,
+    name: "Methi Dana (मेथी)",
+    price: "Rs 20 / 100gm",
+    image: "img/methei.jpeg",
+    description: "Fenugreek seeds used in cooking and Ayurvedic remedies."
+  },
+  {
+    id: 18,
+    name: "Saunf",
+    price: "Rs 20 / 100gm",
+    image: "img/saunf.jpeg",
+    description: "Fennel seeds known for digestive benefits and sweet aroma."
+  },
+  {
+    id: 19,
+    name: "Dhaniya Sabut (धनिया)",
+    price: "Rs 80 / 500gm",
+    image: "img/sabutdhniya.jpeg",
+    description: "Whole coriander seeds for authentic Indian flavors."
+  },
+  {
+    id: 20,
+    name: "Dhaniya Powder (धनिया)",
+    price: "Rs 100 / 500gm",
+    image: "img/dhaniyapowder.jpeg",
+    description: "Freshly ground coriander powder for daily cooking."
+  },
+
+  {
+    id: 21,
+    name: "Malka Masoor Dal",
+    price: "Rs 40 / 500gm",
+    image: "img/malka.jpeg",
+    description: "Protein-rich red lentils, quick to cook and healthy."
+  },
+  {
+    id: 22,
+    name: "Moong Dhoba Dal",
+    price: "Rs 55 / 500gm",
+    image: "img/moongdhoba.jpeg",
+    description: "Cleaned moong dal, light and easy to digest."
+  },
+  {
+    id: 23,
+    name: "Moong Chilka Dal",
+    price: "Rs 55 / 500gm",
+    image: "img/moongchilka.jpg",
+    description: "Moong dal with skin, rich in fiber and nutrients."
+  },
+  {
+    id: 24,
+    name: "Chana Dal",
+    price: "Rs 40 / 500gm",
+    image: "img/chanadal.jpeg",
+    description: "Popular lentil used in dals, snacks, and curries."
+  },
+
+  {
+    id: 25,
+    name: "Urad Dal",
+    price: "Rs 55 / 500gm",
+    image: "img/urddalw.png",
+    description: "White urad dal ideal for dosa, idli, and dals."
+  },
+  {
+    id: 26,
+    name: "Urad Dhoba Dal (New)",
+    price: "Rs 65 / 500gm",
+    image: "img/urddhoba.jpeg",
+    description: "Premium cleaned urad dal with better texture."
+  },
+  {
+    id: 27,
+    name: "Mix Dal",
+    price: "Rs 50 / 500gm",
+    image: "img/mixdal.jpg",
+    description: "Healthy mix of different lentils for balanced nutrition."
+  },
+
+  {
+    id: 28,
+    name: "Rajma",
+    price: "Rs 70 / 500gm",
+    image: "img/rajma.jpeg",
+    description: "High-quality kidney beans, perfect for rajma curry."
+  },
+  {
+    id: 29,
+    name: "Chole",
+    price: "Rs 45 / 500gm",
+    image: "img/choole.webp",
+    description: "Kabuli chana used in chole and salads."
+  },
+  {
+    id: 30,
+    name: "Sabut Chana",
+    price: "Rs 40 / 500gm",
+    image: "img/sabutchana.jpg",
+    description: "Whole black chickpeas, rich in protein and fiber."
+  },
+
+  {
+    id: 31,
+    name: "Dal Chini",
+    price: "Rs 60 / 100gm",
+    image: "img/dalchini.jpg",
+    description: "Cinnamon sticks used for aroma and sweetness."
+  },
+  {
+    id: 32,
+    name: "Elaichi",
+    price: "Rs 340 / 100gm",
+    image: "img/ilaychi.jpeg",
+    description: "Green cardamom with strong aroma and premium quality."
+  },
+
+  {
+    id: 33,
+    name: "Salt",
+    price: "Rs 50 / 1kg",
+    image: "img/sandhanamak.jpeg",
+    description: "Everyday cooking salt for all households."
+  },
+  {
+    id: 34,
+    name: "Sendha Namak",
+    price: "Rs 50 / kg",
+    image: "img/saltvrt.jpeg",
+    description: "Rock salt used in fasting and Ayurvedic cooking."
+  },
+  {
+    id: 35,
+    name: "Tata Salt",
+    price: "Rs 28 / kg",
+    image: "img/tatasalt.jpeg",
+    description: "Trusted iodized salt for daily nutrition."
+  },
+
+  {
+    id: 36,
+    name: "Rai (Mustard Seeds)",
+    price: "Rs 10 / 100gm",
+    image: "img/rai.jpeg",
+    description: "Mustard seeds used for tempering and pickles."
+  },
+  {
+    id: 37,
+    name: "Badi Elaichi",
+    price: "Rs 220 / 100gm",
+    image: "img/badiilaychi.jpeg",
+    description: "Black cardamom with smoky aroma."
+  },
+  {
+    id: 38,
+    name: "Soya Badi Big",
+    price: "Rs 80 / 100gm",
+    image: "img/soyabadibig.jpeg",
+    description: "Large soy chunks rich in protein."
+  },
+  {
+    id: 39,
+    name: "Soya Badi Small",
+    price: "Rs 90 / 100gm",
+    image: "img/soyabadismall.jpeg",
+    description: "Small soy chunks, perfect for curries."
+  },
+  {
+    id: 40,
+    name: "Black Salt",
+    price: "Rs 50 / 1kg",
+    image: "img/blacksalt.jpg",
+    description: "Kala namak with tangy taste, good for digestion."
+  }
+];
+
+
+/* ================= CART ================= */
+let cart = [];
+
+/* ================= URL PARAM ================= */
+const params = new URLSearchParams(window.location.search);
+const productId = parseInt(params.get("id"), 10);
+const product = products.find(p => p.id === productId);
+
+const container = document.getElementById("productDetail");
+
+if (!product) {
+  container.innerHTML = `<h3 class="text-danger">Product not found</h3>`;
+} else {
+  container.innerHTML = `
+    <div class="col-md-6 mb-4">
+      <img src="${product.image}" class="img-fluid product-img rounded">
+    </div>
+
+    <div class="col-md-6">
+      <h2>${product.name}</h2>
+      <p class="fs-4 fw-bold">${product.price}</p>
+<p class="text-muted mt-2">${product.description}</p>
+
+      <label class="fw-bold mb-1">Quantity</label>
+      <input type="number" min="1" value="1"
+        id="qty-${product.id}"
+        class="form-control w-50 mb-3">
+
+      <button class="btn btn-primary btn-lg"
+        onclick="addToCart(${product.id})">
+        <i class="fa fa-cart-plus"></i> Add to Cart
+      </button>
+    </div>
+  `;
+}
+
+/* ================= ADD TO CART ================= */
+function addToCart(productId) {
+  const product = products.find(p => p.id === productId);
+  const qty = parseInt(document.getElementById(`qty-${productId}`).value, 10);
+
+  if (!qty || qty <= 0) return;
+
+  const existing = cart.find(item => item.id === productId);
+
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cart.push({
+      id: product.id,
+      name: product.name,
+      qty: qty
+    });
+  }
+
+  updateCartCount();
+}
+
+/* ================= CART COUNT ================= */
+function updateCartCount() {
+  let total = 0;
+  cart.forEach(item => total += item.qty);
+  document.getElementById("cartCount").innerText = total;
+}
+
+/* ================= WHATSAPP CHECKOUT ================= */
+function checkoutWhatsApp() {
+  if (cart.length === 0) {
+    alert("Cart is empty");
+    return;
+  }
+
+  let msg = "🛒 *New Order*%0A%0A";
+  cart.forEach((item, i) => {
+    msg += `${i + 1}. ${item.name}%0A   Qty: ${item.qty}%0A%0A`;
+  });
+
+  const phone = "919999999999"; // YOUR NUMBER
+  window.open(`https://wa.me/${phone}?text=${msg}`, "_blank");
+}
+</script>
+
+</body>
+</html>

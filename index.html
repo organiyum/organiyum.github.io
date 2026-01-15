@@ -885,8 +885,10 @@ products.forEach(product => {
   productList.innerHTML += `
     <div class="col-md-2 col-lg-2 col-xl-2">
       <div class="rounded fruite-item">
-        <img src="${product.image}" style="height: 160px;" class="img-fluid product-image rounded-top">
+        <a href="product.html?id=${product.id}" class="text-decoration-none text-dark">
 
+        <img src="${product.image}" style="height: 160px;" class="img-fluid product-image rounded-top">
+</a>
         <div class="p-3">
           <h6>${product.name}</h6>
           <p class="fw-bold">${product.price}</p>

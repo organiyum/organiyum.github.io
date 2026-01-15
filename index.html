@@ -77,9 +77,9 @@ let cart = [];
               let message = "🛒 *New Order* %0A%0A";
             
               cart.forEach((item, index) => {
-                message += `${index + 1}. ${item.name}%0A`;
-                message += ` ${item.unit}%0A`;
-                message += `   Qty: ${item.qty}%0A%0A`;
+                message += `${index + 1}. ${item.name} , %0A`;
+                message += ` ${item.unit}, %0A`;
+                message += `   Qty: ${item.qty}, %0A%0A`;
               });
             
               message += "📍 Please confirm availability.";
@@ -96,8 +96,8 @@ let cart = [];
 const products = [
   { id: 1, name: "Black Musturd Oil Gold", price: "Rs 190 / Ltr", image: "img/mustantoill.jpeg" },
   { id: 1, name: "Black Musturd Oil Premimum", price: "Rs 280 / Ltr", image: "img/mustantoill.jpeg" },
-  { id: 1, name: "Yellow Musturd Oil Gold (पिली सरसो तेल )", price: "Rs 280/ Ltr", image: "img/yellomusturd.jpeg" },
-  { id: 1, name: "Yellow Musturd Oil Premimum (पिली सरसो तेल )", price: "Rs 380 / Ltr", image: "img/yellomusturd.jpeg" },
+  { id: 1, name: "Yellow Musturd Oil Gold (पिली सरसो तेल )", price: "Rs 280/ Ltr", image: "img/banner3.jpeg" },
+  { id: 1, name: "Yellow Musturd Oil Premimum (पिली सरसो तेल )", price: "Rs 380 / Ltr", image: "img/banner3.jpeg" },
   { id: 1, name: "Sesame Oil Gold", price: "Rs 470 / Ltr", image: "img/seasam.jpeg" },
   { id: 1, name: "Sesame Oil Premimum", price: "Rs 550 / kg", image: "img/seasam.jpeg" },
   { id: 1, name: "Coconut Oil", price: "Rs 1000 / kg", image: "img/coconut.jpeg" },
@@ -163,13 +163,13 @@ const products = [
                         .filter(p => p.name.toLowerCase().includes(keyword))
                         .forEach(product => {
                           productList.innerHTML += `
-                            <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="col-md-3 col-lg-3 col-xl-3">
                               <div class="rounded fruite-item">
-                                <img src="${product.image}" style="height:320px"
-                                     class="img-fluid w-100 rounded-top">
+                                <img src="${product.image}" style="height:160px"
+                                     class="img-fluid rounded-top">
                     
                                 <div class="p-3">
-                                  <h5>${product.name}</h5>
+                                  <h6>${product.name}</h6>
                                   <p class="fw-bold">${product.price}</p>
                     
                                   <input type="number" min="1" value="1"
@@ -274,8 +274,8 @@ const products = [
 
 
         <!-- Hero Start -->
-        <div class="container-fluid py-5 mb-5 hero-header">
-            <div class="container py-5">
+        <div class="container-fluid mb-5 hero-header">
+            <div class="container">
                 <div class="row g-5 align-items-center">
                     <div class="col-md-12 col-lg-7">
                         <h4 class="mb-3 text-secondary">100% Pure</h4>
@@ -296,6 +296,21 @@ const products = [
                                     <img src="img/mixspices.jpeg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
                                     <a href="#" class="btn px-4 py-2 text-white rounded">Spices</a>
                                 </div>
+                                <div class="carousel-item rounded">
+                                    <img src="img/banner1.jpeg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+                                    <a href="#" class="btn px-4 py-2 text-white rounded"></a>
+                                </div>
+
+                                <div class="carousel-item rounded">
+                                    <img src="img/banner3.jpeg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+                                    <a href="#" class="btn px-4 py-2 text-white rounded"></a>
+                                </div>
+                                
+                                <div class="carousel-item rounded">
+                                    <img src="img/banner3.jpeg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+                                    <a href="#" class="btn px-4 py-2 text-white rounded"></a>
+                                </div>
+                                
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -826,6 +841,7 @@ const products = [
         cart.push({
           id: product.id,
           name: product.name,
+          unit: product.price,
           qty: qty
         });
       }
@@ -852,12 +868,12 @@ const productList = document.getElementById("productList");
 
 products.forEach(product => {
   productList.innerHTML += `
-    <div class="col-md-6 col-lg-4 col-xl-3">
+    <div class="col-md-2 col-lg-2 col-xl-2">
       <div class="rounded fruite-item">
-        <img src="${product.image}" style="height: 280px;" class="img-fluid w-100 rounded-top">
+        <img src="${product.image}" style="height: 160px;" class="img-fluid  rounded-top">
 
         <div class="p-3">
-          <h5>${product.name}</h5>
+          <h6>${product.name}</h6>
           <p class="fw-bold">${product.price}</p>
 
           <input type="number" min="1" value="1"

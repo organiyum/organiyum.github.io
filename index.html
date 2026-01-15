@@ -833,7 +833,18 @@ const products = [
       updateCartCount(); // 👈 update floating icon
     }
     </script>
-    
+    <script>
+        function updateCartCount() {
+          let total = 0;
+        
+          cart.forEach(item => {
+            total += item.qty;
+          });
+        
+          document.getElementById("cartCount").innerText = total;
+        }
+        </script>
+        
         
 
 <script>

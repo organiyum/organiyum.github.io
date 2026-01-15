@@ -58,6 +58,11 @@
               align-items: center;
               justify-content: center;
             }
+
+            .textwhitesize {
+                color: #fff;
+              font-size: 12px;
+            
             </style>
             
         <!-- Template Stylesheet -->
@@ -179,7 +184,7 @@ const products = [
                                     id="qty-${product.id}"
                                     class="form-control mb-2">
                     
-                                  <button class="btn btn-primary w-100"
+                                  <button class="btn btn-primary w-100 textwhitesize" 
                                     onclick="addToCart(${product.id})">
                                     Add to Cart
                                   </button>
@@ -819,7 +824,7 @@ const products = [
                         id="qty-${product.id}"
                         class="form-control mb-2">
         
-                      <button class="btn btn-primary w-100"
+                      <button class="btn btn-primary w-100 textwhitesize" 
                         onclick="addToCart(${product.id})">
                         Add to Cart
                       </button>
@@ -883,7 +888,7 @@ products.forEach(product => {
                  id="qty-${product.id}"
                  class="form-control mb-2">
 
-          <button class="btn btn-primary w-100"
+          <button class="btn btn-primary w-100 textwhitesize" 
             onclick="addToCart(${product.id})">
             Add to Cart
           </button>
